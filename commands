@@ -6,22 +6,22 @@ pip install -r requirements.txt
 python.exe -m pip install --upgrade pip
 docker-compose build
 docker-compose up
-docker-compose run --rm books-app sh -c "django-admin startproject books ."
+docker-compose run --rm books-application sh -c "django-admin startproject books ."
 docker-compose up --remove-orphans
-docker-compose run --rm books-app sh -c "python manage.py startapp store"
-docker-compose run --rm books-app sh -c "python makemigrations"
-docker-compose run --rm books-app sh -c "python manage.py migrate"
-docker-compose run --rm books-app sh -c "python manage.py showmigrations"
-docker-compose run --rm books-app sh -c "python manage.py createsuperuser"
+docker-compose run --rm books-application sh -c "python manage.py startapp store"
+docker-compose run --rm books-application sh -c "python makemigrations"
+docker-compose run --rm books-application sh -c "python manage.py migrate"
+docker-compose run --rm books-application sh -c "python manage.py showmigrations"
+docker-compose run --rm books-application sh -c "python manage.py createsuperuser"
 
 
 https://question-it.com/questions/6785331/ja-sluchajno-udalil-papku-migratsii-v-django?ysclid=lem9phk7ls698488143
-docker-compose run --rm books-app sh -c "python manage.py shell"
+docker-compose run --rm books-application sh -c "python manage.py shell"
 from django.db.migrations.recorder import MigrationRecorder
 MigrationRecorder.Migration.objects.all().delete()
-docker-compose run --rm books-app sh -c "python manage.py migrate --fake"
-docker-compose run --rm books-app sh -c "python manage.py makemigrations -n drop_all_tables store_to_remove"
-docker-compose run --rm books-app sh -c "python manage.py sqlclear books"
-docker-compose run --rm books-app sh -c "python migrate store zero"
+docker-compose run --rm books-application sh -c "python manage.py migrate --fake"
+docker-compose run --rm books-application sh -c "python manage.py makemigrations -n drop_all_tables store_to_remove"
+docker-compose run --rm books-application sh -c "python manage.py sqlclear books"
+docker-compose run --rm books-application sh -c "python migrate store zero"
 http://127.0.0.1:8000
 http://127.0.0.1:8000/admin/
