@@ -20,6 +20,21 @@ docker-compose run --rm books-application sh -c "./manage.py migrate"
 docker-compose run --rm books-application sh -c "python manage.py showmigrations"
 docker-compose run --rm books-application sh -c "python manage.py createsuperuser"
 
+Тестирование
+
+docker-compose run --rm books-application sh -c "python manage.py test store.tests.test_api"
+docker-compose run --rm books-application sh -c "python manage.py test store.tests.test_serializer"
+
+docker-compose run --rm books-application sh -c "coverage run --source='.' ./manage.py test store/tests"
+docker-compose run --rm books-application sh -c "coverage report"
+docker-compose run --rm books-application sh -c "coverage html"
+
+
+Зайти в контейнер.
+docker exec -it dj_pomidor_books-application_1 /bin/sh
+
+
+
 
 https://question-it.com/questions/6785331/ja-sluchajno-udalil-papku-migratsii-v-django?ysclid=lem9phk7ls698488143
 docker-compose run --rm books-application sh -c "python manage.py shell"
