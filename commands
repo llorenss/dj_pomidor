@@ -1,6 +1,7 @@
 cd /mnt/c/python/dj_pomidor
 py -m venv .venv --prompt VirtualEnv
 .venv/Scripts/activate
+pip install Django==4.1.7 djangorestframework==3.14.0
 pip freeze
 pip install -r requirements.txt
 python.exe -m pip install --upgrade pip
@@ -29,4 +30,5 @@ docker-compose run --rm books-application sh -c "python manage.py makemigrations
 docker-compose run --rm books-application sh -c "python manage.py sqlclear books"
 docker-compose run --rm books-application sh -c "python migrate store zero"
 http://127.0.0.1:8000
-http://127.0.0.1:df8000/admin/
+http://127.0.0.1:8000/admin/
+http://127.0.0.1:8000/book/?format=json

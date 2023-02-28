@@ -1,0 +1,20 @@
+cd /mnt/c/fullstack/selfread
+
+(cd ./Docker/dev && sudo docker-compose up --build)
+
+black --line-length=79 ./
+
+black --line-length=79 djano/utils.py
+
+Другой способ это попасть внутрь контейнера через терминал. 
+Мы можем открыть отдельное окно WSL терминала и подключиться 
+к среде внутри контейнера с помощью команды 
+sudo docker exec -ti selfread_dev_django_1 /bin/bash
+
+
+И мы также можем послать одну отдельную команду внутрь Docker контейнера 
+без полного подключения к нему через Docker Compose таким образом:
+(cd ./Docker/dev/ && sudo docker-compose exec django python manage.py makemigrations --settings=project.settings.dev)
+(cd ./Docker/dev/ && sudo docker-compose exec django python manage.py migrate --settings=project.settings.dev)
+
+http://localhost:8000/adminpage/
