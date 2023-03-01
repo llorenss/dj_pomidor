@@ -1,6 +1,7 @@
 cd /mnt/c/python/dj_pomidor
 py -m venv .venv --prompt VirtualEnv
 .venv/Scripts/activate
+deactivate
 pip install Django==4.1.7 djangorestframework==3.14.0
 pip freeze
 pip install -r requirements.txt
@@ -34,8 +35,6 @@ docker-compose run --rm books-application sh -c "coverage html"
 docker exec -it dj_pomidor_books-application_1 /bin/sh
 
 
-
-
 https://question-it.com/questions/6785331/ja-sluchajno-udalil-papku-migratsii-v-django?ysclid=lem9phk7ls698488143
 docker-compose run --rm books-application sh -c "python manage.py shell"
 from django.db.migrations.recorder import MigrationRecorder
@@ -47,3 +46,18 @@ docker-compose run --rm books-application sh -c "python migrate store zero"
 http://127.0.0.1:8000
 http://127.0.0.1:8000/admin/
 http://127.0.0.1:8000/book/?format=json
+
+Фильтр
+http://127.0.0.1:8000/book/?price=100
+
+Поиск
+http://127.0.0.1:8000/book/?search=tom
+
+Сортировка
+http://127.0.0.1:8000/book/?ordering=-price
+
+https://www.django-rest-framework.org/api-guide/filtering/#djangofilterbackend
+
+Тестирование
+docker-compose run --rm books-application sh -c "python manage.py test store.tests.test_api.BooksApiTestCase.test_get"
+docker-compose run --rm books-application sh -c "python manage.py test store.tests.test_api.BooksApiTestCase.test_get_search"
