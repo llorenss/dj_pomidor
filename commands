@@ -61,3 +61,13 @@ https://www.django-rest-framework.org/api-guide/filtering/#djangofilterbackend
 Тестирование
 docker-compose run --rm books-application sh -c "python manage.py test store.tests.test_api.BooksApiTestCase.test_get"
 docker-compose run --rm books-application sh -c "python manage.py test store.tests.test_api.BooksApiTestCase.test_get_search"
+
+Авторизация
+
+https://www.django-rest-framework.org/api-guide/permissions/
+
+https://www.digitalocean.com/community/tutorials/oauth-2-ru
+
+https://python-social-auth.readthedocs.io/en/latest/configuration/django.html
+
+https://python-social-auth.readthedocs.io/en/latest/backends/github.html

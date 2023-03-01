@@ -3,3 +3,4 @@ djangorestframework==3.14.0
 psycopg2==2.8.6
 coverage==7.2.1
 django-filter==22.1
+social-auth-app-django==5.0.0
