@@ -11,4 +11,4 @@ class Book(models.Model):
         verbose_name_plural='Книги'
         # знак минус обратная сортировка
         # сортировка перейдёт в выдачу в браузер
-        ordering = ['-name']
+        # ordering = ['-name']
