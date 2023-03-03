@@ -3,6 +3,11 @@ https://github.com/llorenss/dj_pomidor
 https://github.com/llorenss/dj_pomidor/network
 py -m venv .venv --prompt VirtualEnv
 .venv/Scripts/activate
+
+py -m venv VirEnv
+VirEnv\Scripts\Activate.ps1
+
+
 deactivate
 pip install Django==4.1.7 djangorestframework==3.14.0
 pip freeze
