@@ -4,6 +4,7 @@ py -m venv .venv --prompt VirtualEnv
 deactivate
 pip install Django==4.1.7 djangorestframework==3.14.0
 pip freeze
+pip freeze > req.txt
 pip install -r requirements.txt
 python.exe -m pip install --upgrade pip
 docker-compose build
@@ -45,6 +46,7 @@ docker-compose run --rm books-application sh -c "python manage.py sqlclear books
 docker-compose run --rm books-application sh -c "python migrate store zero"
 http://127.0.0.1:8000
 http://127.0.0.1:8000/admin/
+http://127.0.0.1:8000/book/
 http://127.0.0.1:8000/book/?format=json
 
 Фильтр
@@ -71,3 +73,24 @@ https://www.digitalocean.com/community/tutorials/oauth-2-ru
 https://python-social-auth.readthedocs.io/en/latest/configuration/django.html
 
 https://python-social-auth.readthedocs.io/en/latest/backends/github.html
+
+
+CRUD
+pip freeze > requirements.txt — команда, которая позволяет создать текстовый 
+документ в котором перечислены все установленные и необходимые для работы 
+Python приложения программные пакеты (чаще всего Django).
+
+python manage.py collectstatic
+
+https://docs.python.org/3/tutorial/venv.html
+
+https://github.com/chepe4pi/books_lessons/tree/day_5/books
+
+
+Запуск всех Тестов
+
+https://docs.djangoproject.com/en/4.2/topics/testing/overview/
+cd /mnt/c/python/dj_pomidor/books/books
+docker-compose run --rm books-application sh -c "./manage.py test store/tests"
+docker-compose run --rm books-application sh -c "./manage.py test store.tests.test_api.BooksApiTestCase.test_create"
+docker-compose run --rm books-application sh -c "./manage.py test store.tests.test_api.BooksApiTestCase.test_update"
