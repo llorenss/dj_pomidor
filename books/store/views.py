@@ -10,10 +10,20 @@ from rest_framework.permissions import (
 )
 from store.permissions import IsOwnerOrStaffOrReadOnly
 from rest_framework.mixins import UpdateModelMixin
+from django.db.models import Count, Case, When, Avg
 
 
 class BookViewSet(ModelViewSet):
-    queryset = Book.objects.all()
+    # queryset = Book.objects.all()
+    queryset = (
+        Book.objects.all()
+        .annotate(
+            annotated_likes=Count(
+                Case(When(userbookrelation__like=True, then=1))
+            )
+        )
+        .order_by("id")
+    )
     serializer_class = BooksSerializer
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     permission_classes = [IsOwnerOrStaffOrReadOnly]

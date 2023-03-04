@@ -99,6 +99,10 @@ https://github.com/chepe4pi/books_lessons/tree/day_5/books
 https://docs.djangoproject.com/en/4.2/topics/testing/overview/
 ; cd /mnt/c/python/dj_pomidor/books/books
 docker-compose run --rm books-application sh -c "./manage.py test store/tests"
+docker-compose run --rm books-application sh -c "./manage.py test store/ ."
+docker-compose run --rm books-application sh -c "./manage.py test store"
+docker-compose run --rm books-application sh -c "./manage.py test store/"
+
 docker-compose run --rm books-application sh -c "./manage.py test store.tests.test_api.BooksApiTestCase.test_create"
 docker-compose run --rm books-application sh -c "./manage.py test store.tests.test_api.BooksApiTestCase.test_update"
 
