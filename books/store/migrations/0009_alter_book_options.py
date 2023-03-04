@@ -4,14 +4,13 @@ from django.db import migrations
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('store', '0008_book_readers_alter_book_owner'),
+        ("store", "0008_book_readers_alter_book_owner"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='book',
+            name="book",
             options={},
         ),
     ]

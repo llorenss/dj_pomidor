@@ -4,15 +4,17 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('store', '0009_alter_book_options'),
+        ("store", "0009_alter_book_options"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='userbookrelation',
-            name='rate',
-            field=models.PositiveBigIntegerField(choices=[(1, 'a'), (2, 'b'), (3, 'c'), (4, 'd'), (5, 'e')], null=True),
+            model_name="userbookrelation",
+            name="rate",
+            field=models.PositiveBigIntegerField(
+                choices=[(1, "a"), (2, "b"), (3, "c"), (4, "d"), (5, "e")],
+                null=True,
+            ),
         ),
     ]

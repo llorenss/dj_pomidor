@@ -4,16 +4,17 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('store', '0002_alter_book_options_alter_book_name_alter_book_price'),
+        ("store", "0002_alter_book_options_alter_book_name_alter_book_price"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='book',
-            name='author_name',
-            field=models.CharField(default='a', max_length=255, verbose_name='Автор'),
+            model_name="book",
+            name="author_name",
+            field=models.CharField(
+                default="a", max_length=255, verbose_name="Автор"
+            ),
             preserve_default=False,
         ),
     ]
