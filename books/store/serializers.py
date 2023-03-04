@@ -5,11 +5,11 @@ from store.models import Book, UserBookRelation
 class BooksSerializer(ModelSerializer):
     class Meta:
         model = Book
-        exclude = ['readers']
+        exclude = ["readers"]
         # fields = '__all__'
 
 
 class UserBookRelationSerializer(ModelSerializer):
     class Meta:
         model = UserBookRelation
-        fields = ('book','like','in_bookmarks','rate')
+        fields = ("book", "like", "in_bookmarks", "rate")

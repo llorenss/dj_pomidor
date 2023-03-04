@@ -4,24 +4,29 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('store', '0001_initial'),
+        ("store", "0001_initial"),
     ]
 
     operations = [
         migrations.AlterModelOptions(
-            name='book',
-            options={'ordering': ['-name'], 'verbose_name': 'Книги', 'verbose_name_plural': 'Книги'},
+            name="book",
+            options={
+                "ordering": ["-name"],
+                "verbose_name": "Книги",
+                "verbose_name_plural": "Книги",
+            },
         ),
         migrations.AlterField(
-            model_name='book',
-            name='name',
-            field=models.CharField(max_length=255, verbose_name='Название'),
+            model_name="book",
+            name="name",
+            field=models.CharField(max_length=255, verbose_name="Название"),
         ),
         migrations.AlterField(
-            model_name='book',
-            name='price',
-            field=models.DecimalField(decimal_places=2, max_digits=7, verbose_name='Цена'),
+            model_name="book",
+            name="price",
+            field=models.DecimalField(
+                decimal_places=2, max_digits=7, verbose_name="Цена"
+            ),
         ),
     ]
