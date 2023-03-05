@@ -4,3 +4,5 @@ psycopg2==2.8.6
 coverage==7.2.1
 django-filter==22.1
 social-auth-app-django==5.0.0
+django-debug-toolbar==3.8.1
+black==23.1.0

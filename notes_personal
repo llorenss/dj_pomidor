@@ -7,6 +7,7 @@ py -m venv .venv --prompt VirtualEnv
 py -m venv VirEnv
 VirEnv\Scripts\Activate.ps1
 
+black --line-length=79 ./
 
 deactivate
 pip install Django==4.1.7 djangorestframework==3.14.0
