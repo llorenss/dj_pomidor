@@ -7,6 +7,7 @@ py -m venv .venv --prompt VirtualEnv
 py -m venv VirEnv
 VirEnv\Scripts\Activate.ps1
 
+black --line-length=79 ./
 
 deactivate
 pip install Django==4.1.7 djangorestframework==3.14.0
@@ -116,3 +117,12 @@ docker-compose run --rm books-application sh -c "./manage.py test store.tests.te
 like bookmarks rating
 
 docker-compose run --rm books-application sh -c "./manage.py test store.tests.test_api.BooksRelationTestCase.test_like"
+
+
+debug_toolbar_force
+
+https://django-debug-toolbar-force.readthedocs.io/en/latest/
+
+в конце всегда: /?debug-toolbar
+
+http://127.0.0.1:8000/book/?debug-toolbar

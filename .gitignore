@@ -2,3 +2,7 @@
 /.idea
 books/passw.py
 /VirEnv
+/.vscode
+/books/__pycache__
+/books/books/__pycache__
+/books/store/__pycache__

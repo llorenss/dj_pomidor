@@ -30,6 +30,7 @@ urlpatterns = [
     # url('', include('social_django.urls', namespace='social')),
     re_path("", include("social_django.urls", namespace="social")),
     path("auth/", auth),
+    path("__debug__/", include("debug_toolbar.urls")),
 ]
 
 urlpatterns += router.urls
