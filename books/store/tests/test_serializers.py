@@ -17,12 +17,22 @@ class BookSerializerTestCase(TestCase):
             name="testbook11", price=55, author_name="b"
         )
 
-        UserBookRelation.objects.create(user=user1, book=book_1, like=True)
-        UserBookRelation.objects.create(user=user2, book=book_1, like=True)
-        UserBookRelation.objects.create(user=user3, book=book_1, like=True)
+        UserBookRelation.objects.create(
+            user=user1, book=book_1, like=True, rate=5
+        )
+        UserBookRelation.objects.create(
+            user=user2, book=book_1, like=True, rate=5
+        )
+        UserBookRelation.objects.create(
+            user=user3, book=book_1, like=True, rate=4
+        )
 
-        UserBookRelation.objects.create(user=user1, book=book_2, like=True)
-        UserBookRelation.objects.create(user=user2, book=book_2, like=True)
+        UserBookRelation.objects.create(
+            user=user1, book=book_2, like=True, rate=3
+        )
+        UserBookRelation.objects.create(
+            user=user2, book=book_2, like=True, rate=4
+        )
         UserBookRelation.objects.create(user=user3, book=book_2, like=False)
 
         books = (
@@ -30,7 +40,8 @@ class BookSerializerTestCase(TestCase):
             .annotate(
                 annotated_likes=Count(
                     Case(When(userbookrelation__like=True, then=1))
-                )
+                ),
+                rating=Avg("userbookrelation__rate"),
             )
             .order_by("id")
         )
@@ -44,6 +55,7 @@ class BookSerializerTestCase(TestCase):
                 "author_name": "a",
                 "likes_count": 3,
                 "annotated_likes": 3,
+                "rating": "4.67",
             },
             {
                 "id": book_2.id,
@@ -52,6 +64,7 @@ class BookSerializerTestCase(TestCase):
                 "author_name": "b",
                 "likes_count": 2,
                 "annotated_likes": 2,
+                "rating": "3.5",
             },
         ]
         self.assertEqual(excepted_data, data)

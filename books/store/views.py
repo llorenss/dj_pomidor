@@ -20,7 +20,8 @@ class BookViewSet(ModelViewSet):
         .annotate(
             annotated_likes=Count(
                 Case(When(userbookrelation__like=True, then=1))
-            )
+            ),
+            rating=Avg("userbookrelation__rate"),
         )
         .order_by("id")
     )
