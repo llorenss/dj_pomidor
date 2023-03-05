@@ -1,20 +1,17 @@
+from django.db.models import Count, Case, When, Avg
 from django.shortcuts import render
-from rest_framework.viewsets import ModelViewSet, GenericViewSet
-from store.serializers import BooksSerializer, UserBookRelationSerializer
-from store.models import Book, UserBookRelation
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.filters import SearchFilter, OrderingFilter
-from rest_framework.permissions import (
-    IsAuthenticatedOrReadOnly,
-    IsAuthenticated,
-)
-from store.permissions import IsOwnerOrStaffOrReadOnly
 from rest_framework.mixins import UpdateModelMixin
-from django.db.models import Count, Case, When, Avg
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.viewsets import ModelViewSet, GenericViewSet
+
+from store.models import Book, UserBookRelation
+from store.permissions import IsOwnerOrStaffOrReadOnly
+from store.serializers import BooksSerializer, UserBookRelationSerializer
 
 
 class BookViewSet(ModelViewSet):
-    # queryset = Book.objects.all()
     queryset = (
         Book.objects.all()
         .annotate(
@@ -23,12 +20,14 @@ class BookViewSet(ModelViewSet):
             ),
             rating=Avg("userbookrelation__rate"),
         )
+        .select_related("owner")
+        .prefetch_related("readers")
         .order_by("id")
     )
     serializer_class = BooksSerializer
     filter_backends = [DjangoFilterBackend, SearchFilter, OrderingFilter]
     permission_classes = [IsOwnerOrStaffOrReadOnly]
-    filterset_fields = ["price"]
+    filter_fields = ["price"]
     search_fields = ["name", "author_name"]
     ordering_fields = ["price", "author_name"]
 
@@ -47,11 +46,7 @@ class UserBooksRelationView(UpdateModelMixin, GenericViewSet):
         obj, _ = UserBookRelation.objects.get_or_create(
             user=self.request.user, book_id=self.kwargs["book"]
         )
-        # просмотр при тестировании был
-        # obj, created = UserBookRelation.objects.get_or_create(user=self.request.user,
-        #                                                 book_id=self.kwargs['book'])
 
-        # print('created', created)
         return obj
 
 

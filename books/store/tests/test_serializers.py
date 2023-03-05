@@ -1,20 +1,28 @@
-from django.test import TestCase
-from store.models import Book, UserBookRelation
-from store.serializers import BooksSerializer
 from django.contrib.auth.models import User
 from django.db.models import Count, Case, When, Avg
+from django.test import TestCase
+
+from store.models import Book, UserBookRelation
+from store.serializers import BooksSerializer
 
 
 class BookSerializerTestCase(TestCase):
     def test_ok(self):
-        user1 = User.objects.create(username="user1")
-        user2 = User.objects.create(username="user2")
-        user3 = User.objects.create(username="user3")
+        user1 = User.objects.create(
+            username="user1", first_name="Ivan", last_name="Petrov"
+        )
+        user2 = User.objects.create(
+            username="user2", first_name="Ivan", last_name="Sidorov"
+        )
+        user3 = User.objects.create(
+            username="user3", first_name="1", last_name="2"
+        )
+
         book_1 = Book.objects.create(
-            name="testbook10", price=25, author_name="a"
+            name="Test book 1", price=25, author_name="Author 1", owner=user1
         )
         book_2 = Book.objects.create(
-            name="testbook11", price=55, author_name="b"
+            name="Test book 2", price=55, author_name="Author 2"
         )
 
         UserBookRelation.objects.create(
@@ -46,25 +54,34 @@ class BookSerializerTestCase(TestCase):
             .order_by("id")
         )
         data = BooksSerializer(books, many=True).data
-        # data = BooksSerializer([book_1, book_2], many=True).data
-        excepted_data = [
+        expected_data = [
             {
                 "id": book_1.id,
-                "name": "testbook10",
+                "name": "Test book 1",
                 "price": "25.00",
-                "author_name": "a",
-                "likes_count": 3,
+                "author_name": "Author 1",
                 "annotated_likes": 3,
                 "rating": "4.67",
+                "owner_name": "user1",
+                "readers": [
+                    {"first_name": "Ivan", "last_name": "Petrov"},
+                    {"first_name": "Ivan", "last_name": "Sidorov"},
+                    {"first_name": "1", "last_name": "2"},
+                ],
             },
             {
                 "id": book_2.id,
-                "name": "testbook11",
+                "name": "Test book 2",
                 "price": "55.00",
-                "author_name": "b",
-                "likes_count": 2,
+                "author_name": "Author 2",
                 "annotated_likes": 2,
-                "rating": "3.5",
+                "rating": "3.50",
+                "owner_name": "",
+                "readers": [
+                    {"first_name": "Ivan", "last_name": "Petrov"},
+                    {"first_name": "Ivan", "last_name": "Sidorov"},
+                    {"first_name": "1", "last_name": "2"},
+                ],
             },
         ]
-        self.assertEqual(excepted_data, data)
+        self.assertEqual(expected_data, data)
