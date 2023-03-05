@@ -15,6 +15,10 @@ class Book(models.Model):
         User, through="UserBookRelation", related_name="books"
     )
 
+    rating = models.DecimalField(
+        max_digits=3, decimal_places=2, default=None, null=True
+    )
+
     # class Meta:
     #     verbose_name='Книги'
     #     verbose_name_plural='Книги'
@@ -35,3 +39,15 @@ class UserBookRelation(models.Model):
 
     def __str__(self):
         return f"{self.user.username}:{self.book.name}, RATE {self.rate}"
+
+    def save(self, *args, **kwargs):
+        from store.logic import set_rating
+
+        creating = not self.pk
+        old_rating = self.rate
+
+        super().save(*args, **kwargs)
+
+        new_rating = self.rate
+        if old_rating != new_rating or creating:
+            set_rating(self.book)

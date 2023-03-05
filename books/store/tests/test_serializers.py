@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User
 from django.db.models import Count, Case, When, Avg
 from django.test import TestCase
-
 from store.models import Book, UserBookRelation
 from store.serializers import BooksSerializer
 
@@ -49,7 +48,6 @@ class BookSerializerTestCase(TestCase):
                 annotated_likes=Count(
                     Case(When(userbookrelation__like=True, then=1))
                 ),
-                rating=Avg("userbookrelation__rate"),
             )
             .order_by("id")
         )
