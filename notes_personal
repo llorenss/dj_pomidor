@@ -126,3 +126,8 @@ https://django-debug-toolbar-force.readthedocs.io/en/latest/
 в конце всегда: /?debug-toolbar
 
 http://127.0.0.1:8000/book/?debug-toolbar
+
+Кэширование:
+docker-compose run --rm books-application sh -c "python manage.py test store/tests"
+
+docker-compose run --rm books-application sh -c "python manage.py test store.tests.test_logic"
